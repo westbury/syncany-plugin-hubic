@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+configurations {
+	pluginjar
+}
+
+project.ext {
+	pluginId = "hubic"
+	pluginName = "Hubic"
+	pluginVersion = "0.5.0-alpha"	
+	pluginDebianVersion = "1"	
+	pluginDate = new Date()
+	pluginAppMinVersion = "0.5.0-alpha"
+	pluginRelease = false
+	pluginConflictsWith = ""
+	
+	pluginVersionSnapshot = "0.5.0-alpha"
+	pluginVersionFull = "${pluginVersion}${pluginVersionSnapshot}"	
+	pluginNeedsOperatingSystemAndArchitecture = false	
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile		project(":syncany-api")
+	compile		"com.google.code.gson:gson:2.6.1"    
+
+	pluginjar	"com.google.code.gson:gson:2.6.1"
+
+	testCompile	project(":syncany-plugin-tests")      
+	testCompile	"junit:junit:4.9"
+}
+
+apply from: '../syncany/gradle/gradle/plugins.jar.gradle'
+apply from: '../syncany/gradle/gradle/plugins.debian.gradle'
+
+
+
+
+
